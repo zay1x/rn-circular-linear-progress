@@ -3,8 +3,10 @@
 ## Demo
 |  IOS | Android  |  
 |---|---|
-|  https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/141ad251-8821-461a-a326-d9793fb385be |  https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/fd311a2a-8d38-4ca1-80ca-6fd92df6e96c |  
+|  ![IOS-ezgif com-video-to-gif-converter](https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/d27c41f5-fef0-4b6b-9076-904fa77fc1f8) |  https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/fd311a2a-8d38-4ca1-80ca-6fd92df6e96c |  
 
+
+![ANDROID-ezgif com-video-to-gif-converter](https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/012323ab-58cd-4655-a352-984169b47348)
 
 
 
