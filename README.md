@@ -6,16 +6,22 @@ rn-circular-linear-progress
 
 ```sh
 npm install rn-circular-linear-progress
+or
+yarn add rn-circular-linear-progress
 ```
 
 ## Usage
 
 ```js
-import { multiply } from 'rn-circular-linear-progress';
+import CircleLinearProgress from 'rn-circular-linear-progress';
 
-// ...
-
-const result = await multiply(3, 7);
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <CircleLinearProgress percent={50} />
+    </View>
+  );
+}
 ```
 
 ## Contributing
