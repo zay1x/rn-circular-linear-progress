@@ -1,6 +1,7 @@
 {
   "name": "rn-circular-linear-progress",
   "version": "0.1.0",
+  "private": false,
   "description": "rn-circular-linear-progress",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
