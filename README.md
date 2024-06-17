@@ -1,7 +1,12 @@
 # rn-circular-linear-progress
 
-|IOS| Android|
-|https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/141ad251-8821-461a-a326-d9793fb385be|https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/fd311a2a-8d38-4ca1-80ca-6fd92df6e96c|
+|  IOS | Android  |  
+|---|---|
+|  https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/141ad251-8821-461a-a326-d9793fb385be |  https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/fd311a2a-8d38-4ca1-80ca-6fd92df6e96c |  
+
+
+|| |
+|||
 
 
 ## Installation
