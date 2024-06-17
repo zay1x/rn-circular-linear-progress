@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
-import type { TextStyle } from 'react-native';
+import type { TextStyle, ViewStyle } from 'react-native';
 import { StyleSheet, View } from 'react-native';
+import interpolate from 'color-interpolate';
 import Animated, {
   runOnJS,
   useAnimatedProps,
@@ -19,17 +20,7 @@ import {
 } from 'react-native-svg';
 
 import DefaultChild from './DefaultChild';
-import {
-  arcs,
-  circumference,
-  cx,
-  cy,
-  palette,
-  radius,
-  sampling,
-  size,
-  strokeWidth,
-} from './utils';
+import { WINDOW_WIDTH, cos, sampling, sin, step } from './utils';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
@@ -37,12 +28,45 @@ interface Props {
   children?: ReactNode;
   percent: number;
   labelStyle?: TextStyle;
+  duration?: number;
+  colors?: string[];
+  size?: number;
+  strokeWidth?: number;
+  bgColorContent?: string;
+  childContainerStyle?: ViewStyle;
 }
 
-const CircleLinearProgress = ({ children, percent, labelStyle }: Props) => {
+const CircleLinearProgress = ({
+  children,
+  percent = 0,
+  labelStyle,
+  duration = 1000,
+  colors = ['#206374', '#2bc3ee'],
+  size = WINDOW_WIDTH * 0.5,
+  strokeWidth = 20,
+  bgColorContent = 'transparent',
+  childContainerStyle,
+}: Props) => {
   if (percent < 0 || percent > 100) {
     throw new Error('Value must be in 0 - 100');
   }
+  if (colors.length !== 2) {
+    throw new Error('Only support for two colors');
+  }
+
+  // Init some variables
+  const palette = interpolate(colors);
+  const radius = size / 2 - strokeWidth / 2;
+  const cx = size / 2;
+  const cy = size / 2;
+  const x = (α: number) => cx - radius * cos(α);
+  const y = (α: number) => cy - radius * sin(α);
+  const arcs: string[] = new Array(sampling).fill(0).map((_, i) => {
+    const a = i * step;
+    return `M ${x(a)} ${y(a)} A ${radius} ${radius} 0 0 1 ${x(a + step)} ${y(a + step)}`;
+  });
+  const circumference = 2 * Math.PI * radius;
+  // End init some variables
 
   const [isCompleted, setIsCompleted] = useState(false);
 
@@ -52,15 +76,10 @@ const CircleLinearProgress = ({ children, percent, labelStyle }: Props) => {
   }));
 
   useEffect(() => {
-    circleProgress.value = withTiming(
-      percent,
-      { duration: 500 },
-      (finished) => {
-        finished && runOnJS(setIsCompleted)(percent === 100);
-      }
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [percent]);
+    circleProgress.value = withTiming(percent, { duration }, (finished) => {
+      finished && runOnJS(setIsCompleted)(percent === 100);
+    });
+  }, [circleProgress, percent, duration]);
 
   return (
     <View style={styles.container}>
@@ -70,7 +89,9 @@ const CircleLinearProgress = ({ children, percent, labelStyle }: Props) => {
           {
             width: radius * 2 - strokeWidth,
             height: radius * 2 - strokeWidth,
+            padding: strokeWidth,
           },
+          childContainerStyle,
         ]}
       >
         {children ?? (
@@ -121,7 +142,7 @@ const CircleLinearProgress = ({ children, percent, labelStyle }: Props) => {
             cy={cy}
             r={radius}
             stroke="#044a5d"
-            fill="transparent"
+            fill={bgColorContent}
             strokeWidth={strokeWidth}
             strokeDasharray={circumference}
             animatedProps={animatedProps}
@@ -141,7 +162,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     position: 'absolute',
     borderRadius: 200,
-    padding: strokeWidth,
     justifyContent: 'center',
     alignItems: 'center',
   },

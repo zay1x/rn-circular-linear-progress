@@ -4,7 +4,7 @@ import CircleLinearProgress from 'rn-circular-linear-progress';
 export default function App() {
   return (
     <View style={styles.container}>
-      <CircleLinearProgress percent={50} />
+      <CircleLinearProgress percent={90} />
     </View>
   );
 }

@@ -45,6 +45,20 @@ export default function App() {
 }
 ```
 
+## Props
+
+| Props               | Type      | Required | Note                   |
+| ------------------- | --------- | -------- | ---------------------- |
+| percent             | number    |          | 1-100                  |
+| children            | ReactNode |          |                        |
+| labelStyle          | TextStyle |          | Style of default label |
+| duration            | number    |          | Duration for animation |
+| colors              | string[]  |          |                        |
+| size                | number    |          | Width of circle        |
+| strokeWidth         | number    |          |                        |
+| bgColorContent      | string    |          |                        |
+| childContainerStyle | ViewStyle |          |                        |
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
