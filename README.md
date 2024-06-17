@@ -1,5 +1,7 @@
 # rn-circular-linear-progress
 
+## Note: Current only support for expo
+
 ## Demo
 
 | IOS                                                                                                                                                | Android                                                                                                                                                |
