@@ -1,14 +1,10 @@
 # rn-circular-linear-progress
 
 ## Demo
-|  IOS | Android  |  
-|---|---|
-|  ![IOS-ezgif com-video-to-gif-converter](https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/d27c41f5-fef0-4b6b-9076-904fa77fc1f8) |  ![ANDROID-ezgif com-video-to-gif-converter](https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/012323ab-58cd-4655-a352-984169b47348) |  
 
-
-
-
-
+| IOS                                                                                                                                                | Android                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ![IOS-ezgif com-video-to-gif-converter](https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/d27c41f5-fef0-4b6b-9076-904fa77fc1f8) | ![ANDROID-ezgif com-video-to-gif-converter](https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/012323ab-58cd-4655-a352-984169b47348) |
 
 ## Installation
 
@@ -27,6 +23,23 @@ export default function App() {
   return (
     <View style={styles.container}>
       <CircleLinearProgress percent={50} />
+    </View>
+  );
+}
+```
+
+### Or
+
+```js
+import { Text } from 'react-native';
+import CircleLinearProgress from 'rn-circular-linear-progress';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <CircleLinearProgress percent={50}>
+        <Text>Helo</Text>
+      </CircleLinearProgress>
     </View>
   );
 }
