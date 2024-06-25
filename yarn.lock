@@ -3302,6 +3302,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-masked-view/masked-view@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "@react-native-masked-view/masked-view@npm:0.3.1"
+  peerDependencies:
+    react: ">=16"
+    react-native: ">=0.57"
+  checksum: 880059020709ce856c448657c2d67a905f2ebcd3f42c1c4d344d732761cb2de98efb600172df5591d943f562393dbca42802e8a903b974aa2b038b441c5718fb
+  languageName: node
+  linkType: hard
+
 "@react-native/assets-registry@npm:0.74.84":
   version: 0.74.84
   resolution: "@react-native/assets-registry@npm:0.74.84"
@@ -4596,13 +4606,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"almost-equal@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "almost-equal@npm:1.1.0"
-  checksum: 6022fbd07dc46fdbcaac24472ab31ed1e9942fc3ae59b24a2df86ab3458a75d5e3e5df5af256f5e0068840308761d760dcd44d5787585df44d5bdb0756526caa
-  languageName: node
-  linkType: hard
-
 "anser@npm:^1.4.9":
   version: 1.4.10
   resolution: "anser@npm:1.4.10"
@@ -5775,13 +5778,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clamp@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "clamp@npm:1.0.1"
-  checksum: 799bd7083736eb975cd4a9a7e8f1a1e38cc3cb6be0384f9732c1da263accb3205385e5c2880e661a0d5a74e0066bfbf8fcd17dd2f509595ce52dd04c84522833
-  languageName: node
-  linkType: hard
-
 "clean-css@npm:^5.2.2":
   version: 5.3.3
   resolution: "clean-css@npm:5.3.3"
@@ -5956,18 +5952,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-interpolate@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "color-interpolate@npm:1.0.5"
-  dependencies:
-    clamp: ^1.0.1
-    color-parse: ^1.2.0
-    color-space: ^1.14.3
-    lerp: ^1.0.3
-  checksum: cc0204930eed3c00177641c8e60dbcb487da75b96a9636abe001ac678c6ef5b6d7aaba7ec850952f663dd37d296aa86e1e14d268968b9c0bf9becbfd301290c5
-  languageName: node
-  linkType: hard
-
 "color-name@npm:1.1.3":
   version: 1.1.3
   resolution: "color-name@npm:1.1.3"
@@ -5975,29 +5959,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-name@npm:^1.0.0, color-name@npm:~1.1.4":
+"color-name@npm:~1.1.4":
   version: 1.1.4
   resolution: "color-name@npm:1.1.4"
   checksum: b0445859521eb4021cd0fb0cc1a75cecf67fceecae89b63f62b201cca8d345baf8b952c966862a9d9a2632987d4f6581f0ec8d957dfacece86f0a7919316f610
-  languageName: node
-  linkType: hard
-
-"color-parse@npm:^1.2.0":
-  version: 1.4.3
-  resolution: "color-parse@npm:1.4.3"
-  dependencies:
-    color-name: ^1.0.0
-  checksum: 3fb417857664c3f16250e60cf97a2b48b36b414c2ea6b163719fb4632879d98505ce4fe1c2a4afd870a399abcf1a794f9a0366556cb3f8eaebd41fddeebddc38
-  languageName: node
-  linkType: hard
-
-"color-space@npm:^1.14.3":
-  version: 1.16.0
-  resolution: "color-space@npm:1.16.0"
-  dependencies:
-    hsluv: ^0.0.3
-    mumath: ^3.3.4
-  checksum: 655ae748f81ef96f2a031e0aaa1e6a6dacf23731c4d7845d7d996dbf6a0a7971d533b378a82031b04e7397c55efd34a2fef784a4af1b89d81ff920e8af03fadf
   languageName: node
   linkType: hard
 
@@ -9606,13 +9571,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hsluv@npm:^0.0.3":
-  version: 0.0.3
-  resolution: "hsluv@npm:0.0.3"
-  checksum: 2cd6dbe3423de7b8dade6429530388c4473dd3f7ded52d2c395dc99b4a0712c2ab215c8186a38a3617e51f344f555a562ac785db433e7364d75011657d1f17da
-  languageName: node
-  linkType: hard
-
 "html-entities@npm:^2.3.2":
   version: 2.5.2
   resolution: "html-entities@npm:2.5.2"
@@ -11598,13 +11556,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lerp@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "lerp@npm:1.0.3"
-  checksum: 352d072fd44378adedaa22b99e718e830489ac715f7c18c1da9033758b2c3d28ac54677e3e829eaf6dc7fd99dbccd97c514e5775ba5ad6f88d1673692d666c14
-  languageName: node
-  linkType: hard
-
 "leven@npm:^3.1.0":
   version: 3.1.0
   resolution: "leven@npm:3.1.0"
@@ -12816,15 +12767,6 @@ __metadata:
   bin:
     multicast-dns: cli.js
   checksum: 00b8a57df152d4cd0297946320a94b7c3cdf75a46a2247f32f958a8927dea42958177f9b7fdae69fab2e4e033fb3416881af1f5e9055a3e1542888767139e2fb
-  languageName: node
-  linkType: hard
-
-"mumath@npm:^3.3.4":
-  version: 3.3.4
-  resolution: "mumath@npm:3.3.4"
-  dependencies:
-    almost-equal: ^1.1.0
-  checksum: 1c4e9fbfa65541399290db370fa6334b09585600f701b99b947ceca6ab080bcd67dc13c8a48c6a99032f2ce46e4522a5c845bd98f9e59c68424a2aee3cbd0d2f
   languageName: node
   linkType: hard
 
@@ -15508,11 +15450,11 @@ __metadata:
   dependencies:
     "@commitlint/config-conventional": ^17.0.2
     "@evilmartians/lefthook": ^1.5.0
+    "@react-native-masked-view/masked-view": ^0.3.1
     "@react-native/eslint-config": ^0.73.1
     "@release-it/conventional-changelog": ^5.0.0
     "@types/jest": ^29.5.5
     "@types/react": ^18.2.44
-    color-interpolate: ^1.0.5
     commitlint: ^17.0.2
     del-cli: ^5.1.0
     eslint: ^8.51.0

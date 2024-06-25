@@ -1,6 +1,6 @@
 {
   "name": "rn-circular-linear-progress",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "rn-circular-linear-progress",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -159,7 +159,7 @@
     ]
   },
   "dependencies": {
-    "color-interpolate": "^1.0.5",
+    "@react-native-masked-view/masked-view": "^0.3.1",
     "react-native-reanimated": "~3.10.1",
     "react-native-svg": "^15.3.0"
   }
