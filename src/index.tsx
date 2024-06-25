@@ -1,26 +1,24 @@
-import type { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
-import type { TextStyle, ViewStyle } from 'react-native';
-import { StyleSheet, View } from 'react-native';
-import interpolate from 'color-interpolate';
+import MaskedView from '@react-native-masked-view/masked-view';
+import { useEffect, useState, type ReactNode } from 'react';
+import { Circle, G, Svg } from 'react-native-svg';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  View,
+  type TextStyle,
+  type ViewStyle,
+} from 'react-native';
 import Animated, {
   runOnJS,
   useAnimatedProps,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {
-  Circle,
-  Defs,
-  G,
-  LinearGradient,
-  Path,
-  Stop,
-  Svg,
-} from 'react-native-svg';
 
 import DefaultChild from './DefaultChild';
-import { WINDOW_WIDTH, cos, sampling, sin, step } from './utils';
+
+const { width: WINDOW_WIDTH } = Dimensions.get('window');
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
@@ -30,6 +28,7 @@ interface Props {
   labelStyle?: TextStyle;
   duration?: number;
   colors?: string[];
+  bgStrokeColor?: string;
   size?: number;
   strokeWidth?: number;
   bgColorContent?: string;
@@ -42,9 +41,10 @@ const CircleLinearProgress = ({
   labelStyle,
   duration = 1000,
   colors = ['#206374', '#2bc3ee'],
+  bgStrokeColor = '#044a5d',
   size = WINDOW_WIDTH * 0.5,
   strokeWidth = 20,
-  bgColorContent = 'transparent',
+  bgColorContent = '#fff',
   childContainerStyle,
 }: Props) => {
   if (percent < 0 || percent > 100) {
@@ -55,17 +55,10 @@ const CircleLinearProgress = ({
   }
 
   // Init some variables
-  const palette = interpolate(colors);
-  const radius = size / 2 - strokeWidth / 2;
+  const r = size / 2 - strokeWidth / 2;
+  const circumference = 2 * Math.PI * r;
   const cx = size / 2;
   const cy = size / 2;
-  const x = (α: number) => cx - radius * cos(α);
-  const y = (α: number) => cy - radius * sin(α);
-  const arcs: string[] = new Array(sampling).fill(0).map((_, i) => {
-    const a = i * step;
-    return `M ${x(a)} ${y(a)} A ${radius} ${radius} 0 0 1 ${x(a + step)} ${y(a + step)}`;
-  });
-  const circumference = 2 * Math.PI * radius;
   // End init some variables
 
   const [isCompleted, setIsCompleted] = useState(false);
@@ -82,89 +75,111 @@ const CircleLinearProgress = ({
   }, [circleProgress, percent, duration]);
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          width: size,
+          height: size,
+          backgroundColor: isCompleted ? colors[1] : colors[0],
+        },
+      ]}
+    >
+      <MaskedView
+        style={styles.maskView}
+        maskElement={
+          <Image
+            style={styles.maskImage}
+            source={{
+              uri: 'https://github.com/zay1x/rn-circular-linear-progress/assets/32409681/ce94f204-67c9-4c89-8e23-ec16f3155fbb',
+            }}
+          />
+        }
+      >
+        <View
+          style={[
+            styles.innerMaskView,
+            {
+              backgroundColor: colors[1],
+            },
+          ]}
+        />
+      </MaskedView>
       <View
         style={[
-          styles.childrenWrapper,
+          styles.inner,
           {
-            width: radius * 2 - strokeWidth,
-            height: radius * 2 - strokeWidth,
             padding: strokeWidth,
           },
-          childContainerStyle,
         ]}
       >
-        {children ?? (
-          <DefaultChild circleProgress={circleProgress} style={labelStyle} />
-        )}
-      </View>
-
-      <Svg width={size} height={size}>
-        <Defs>
-          {arcs.map((_, i) => {
-            const isReversed = i / sampling >= 0.5;
-            return (
-              <LinearGradient key={i} id={`gradient-${i}`}>
-                <Stop
-                  stopColor={
-                    isCompleted
-                      ? palette(arcs.length - 1)
-                      : palette(i / sampling)
-                  }
-                  offset={isReversed ? '100%' : '0%'}
-                />
-                <Stop
-                  stopColor={
-                    isCompleted
-                      ? palette(arcs.length - 1)
-                      : palette(i + 1 / sampling)
-                  }
-                  offset={isReversed ? '0%' : '100%'}
-                />
-              </LinearGradient>
-            );
-          })}
-        </Defs>
-        <G rotation="90" origin={`${cx}, ${cy}`}>
-          {arcs.map((d, i) => (
-            <Path
-              key={i}
-              stroke={`url(#gradient-${i})`}
+        <Svg width={size} height={size} style={styles.svg}>
+          <G rotation="-90" origin={`${cx}, ${cy}`}>
+            <AnimatedCircle
+              cx={cx}
+              cy={cy}
+              r={r}
+              stroke={bgStrokeColor}
               fill="transparent"
-              d={d}
               strokeWidth={strokeWidth}
+              strokeDasharray={circumference}
+              animatedProps={animatedProps}
             />
-          ))}
-        </G>
-        <G rotation="-90" origin={`${cx}, ${cy}`}>
-          <AnimatedCircle
-            cx={cx}
-            cy={cy}
-            r={radius}
-            stroke="#044a5d"
-            fill={bgColorContent}
-            strokeWidth={strokeWidth}
-            strokeDasharray={circumference}
-            animatedProps={animatedProps}
-          />
-        </G>
-      </Svg>
+          </G>
+        </Svg>
+        <View
+          style={[
+            styles.innerContent,
+            {
+              backgroundColor: bgColorContent,
+            },
+            childContainerStyle,
+          ]}
+        >
+          {children ?? (
+            <DefaultChild circleProgress={circleProgress} style={labelStyle} />
+          )}
+        </View>
+      </View>
     </View>
   );
 };
 
+export default CircleLinearProgress;
+
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    transform: [{ rotateZ: '-90deg' }],
+    position: 'relative',
+    borderRadius: 9999,
   },
-  childrenWrapper: {
-    backgroundColor: 'white',
+  maskView: {
+    flex: 1,
+  },
+  maskImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 9999,
+    backgroundColor: 'transparent',
+  },
+  innerMaskView: {
+    flex: 1,
+    borderRadius: 9999,
+  },
+  inner: {
     position: 'absolute',
-    borderRadius: 200,
-    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+    transform: [{ rotateZ: '90deg' }],
+  },
+  svg: {
+    position: 'absolute',
+  },
+  innerContent: {
+    flex: 1,
+    borderRadius: 1000,
+    overflow: 'hidden',
     alignItems: 'center',
+    justifyContent: 'center',
   },
 });
-
-export default CircleLinearProgress;
